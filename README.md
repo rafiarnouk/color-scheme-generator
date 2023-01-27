@@ -18,3 +18,9 @@ be used by graphic designers, game developers, fashion designers, etc.
 Graphic design has been a hobby of mine for over half a decade now, and colour schemes are crucial in the field.
 With this program I will be able to automate the process of coming up with colour schemes. I am very curious to see what
 level of complexity I can reach with my current skills in programming, so I am excited to see where this project goes.
+
+## User Stories
+- As a user, I want to be able to **add** a colour scheme to my collection.
+- As a user, I want to be able to **generate** colour schemes for a colour that I have chosen.
+- As a user, I want to be able to **select** from different types of colour schemes, such as monochromatic or analogous ones.
+- As a user, I want to be able to **remove** a colour scheme from my collection.
