@@ -14,6 +14,10 @@ public class Gallery {
         return gallery;
     }
 
+    public Integer getSize() {
+        return gallery.size();
+    }
+
     public void addScheme(ColourScheme cs) {
         gallery.add(cs);
     }

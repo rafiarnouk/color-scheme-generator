@@ -23,12 +23,28 @@ public class Colour {
         return blue;
     }
 
-    public Colour invert() {
-        Colour inverted = new Colour(255 - getRed(), 255 - getBlue(), 255 - getGreen());
+    public void setRed(Integer red) {
+        this.red = red;
+    }
+
+    public void setGreen(Integer green) {
+        this.green = green;
+    }
+
+    public void setBlue(Integer blue) {
+        this.blue = blue;
+    }
+
+    public void displayColour() {
+        System.out.println("R:" + getRed() + " G:" + getGreen() + " B:" + getBlue());
+    }
+
+    private Colour invert() {
+        Colour inverted = new Colour(255 - getRed(), 255 - getGreen(), 255 - getBlue());
         return inverted;
     }
 
-    public Colour desaturate() {
+    private Colour desaturate() {
         Integer grayValue = (getRed() + getGreen() + getBlue()) / 3;
         Colour desaturated = new Colour(grayValue, grayValue, grayValue);
         return desaturated;
@@ -38,6 +54,7 @@ public class Colour {
         ColourScheme complementary = new ColourScheme();
         complementary.addColour(this);
         complementary.addColour(this.invert());
+        complementary.setName(generateName("Complementary"));
         return complementary;
     }
 
@@ -53,13 +70,12 @@ public class Colour {
         Integer darkerR = (255 - getRed()) / 3;
         Integer darkerG = (255 - getGreen()) / 3;
         Integer darkerB = (255 - getBlue()) / 3;
-        for (Integer i = 0; i < 3; i++) {
+        for (Integer i = 0; i <= 3; i++) {
             Colour newColour = new Colour(getRed() + (darkerR * i), getGreen() + (darkerG * i),
                     getBlue() + (darkerB * i));
             monochrome.addColour(newColour);
         }
-        Colour black = new Colour(255, 255, 255);
-        monochrome.addColour(black);
+        monochrome.setName(generateName("Monochrome"));
         return monochrome;
     }
 
@@ -70,6 +86,11 @@ public class Colour {
         analogous.addColour(before);
         analogous.addColour(this);
         analogous.addColour(after);
+        analogous.setName(generateName("Analogous"));
         return analogous;
+    }
+
+    private String generateName(String schemeType) {
+        return (schemeType + " (" + getRed() + ", " + getGreen() + ", " + getBlue() + ")");
     }
 }
