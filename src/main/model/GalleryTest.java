@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// tests for gallery class
 class GalleryTest {
     private Gallery testGallery;
     private ColourScheme testSchemeA;

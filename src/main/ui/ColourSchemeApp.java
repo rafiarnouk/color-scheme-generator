@@ -5,16 +5,20 @@ import model.ColourScheme;
 import model.Gallery;
 import java.util.Scanner;
 
+// interactive console based colour scheme generator app
 public class ColourSchemeApp {
     private Gallery gallery;
     private Colour colour;
     private Scanner input;
     private static final int COLOUR_BLOCK_WIDTH = 6;
 
+    // EFFECTS: runs the colour scheme app
     public ColourSchemeApp() {
         runColourScheme();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes inputs
     private void runColourScheme() {
         boolean keepRunning = true;
         String command = null;
@@ -36,29 +40,52 @@ public class ColourSchemeApp {
         }
     }
 
+    // EFFECTS: displays menu of things the user can do, including removing a colour scheme if the gallery isn't empty
     private void displayMenu() {
-        System.out.println("\nPick a colour, view your gallery, or quit the generator.");
+        System.out.println("\nWhat would you like to do next?");
         System.out.println("\tp - pick a colour");
         System.out.println("\tv - view gallery");
+        if (gallery.getSize() > 0) {
+            System.out.println("\tr - remove scheme");
+        }
+        System.out.println("\ts - see examples");
         System.out.println("\tq - quit generator");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes command from user
     private void processCommand(String command) {
         if (command.equals("p")) {
             processColour();
             generateScheme();
         } else if (command.equals("v")) {
-            viewGallery();
+            viewGallery("");
+        } else if (command.equals("r")) {
+            removeColourScheme();
+        } else if (command.equals("s")) {
+            displayExamples();
         }
     }
 
-    private void viewGallery() {
+    // MODIFIES: this
+    // EFFECTS: removes chosen colour scheme from gallery
+    private void removeColourScheme() {
+        viewGallery("");
+        System.out.println("\nSelect the position of the scheme you want to remove, from 1 to "
+                + gallery.getSize() + ".");
+        int pos = input.nextInt();
+        gallery.removeScheme(pos);
+        viewGallery("now ");
+    }
+
+    // EFFECTS: prints gallery of colour schemes in console
+    private void viewGallery(String update) {
         if (gallery.getGallery().isEmpty()) {
-            System.out.println("You haven't added any colour schemes to your gallery yet.");
+            System.out.println("You " + update + "have no colour schemes in your gallery.");
         } else if (gallery.getSize() == 1) {
-            System.out.println("You have 1 colour scheme in your gallery.");
+            System.out.println("You " + update + "have 1 colour scheme in your gallery.");
         } else {
-            System.out.println("You have " + gallery.getSize() + " colour schemes in your gallery.");
+            System.out.println("You " + update + "have " + gallery.getSize() + " colour schemes in your gallery.");
         }
 
         System.out.println("\t");
@@ -73,6 +100,7 @@ public class ColourSchemeApp {
         }
     }
 
+    // EFFECTS: displays name and colours of colour scheme
     public void displayScheme(ColourScheme cs) {
         System.out.println("NAME: " + cs.getName());
         String output = new String();
@@ -82,6 +110,8 @@ public class ColourSchemeApp {
         System.out.println(output);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes rgb colour chosen by user
     private void processColour() {
         System.out.println("Choose red value between 0 and 255.");
         int red = input.nextInt();
@@ -95,6 +125,8 @@ public class ColourSchemeApp {
         colour.setBlue(blue);
     }
 
+    // MODIFIES: this
+    // EFFECTS: generates chosen scheme for colour and allows user to save it
     private void generateScheme() {
         displaySchemeMenu();
         ColourScheme chosenScheme = new ColourScheme();
@@ -118,14 +150,29 @@ public class ColourSchemeApp {
         }
     }
 
+    // EFFECTS: displays colour chosen and colour scheme options menu
     private void displaySchemeMenu() {
         String colourPreview = colour.getColourPrintCode(3);
 
         System.out.println("\nYour colour is " + colourPreview);
         System.out.println("What type of colour scheme would you like?");
         System.out.println("\tm - monochrome");
-        System.out.println("\tc - complementary");
         System.out.println("\ta - analogous");
         System.out.println("\tt - triadic");
+        System.out.println("\tc - complementary");
+    }
+
+    private void displayExamples() {
+        Colour sampleColour = new Colour(150,100,200);
+        String colourPreview = sampleColour.getColourPrintCode(3);
+        ColourScheme monochrome = sampleColour.monochromeScheme();
+        ColourScheme analogous = sampleColour.analogousScheme();
+        ColourScheme triadic = sampleColour.triadicScheme();
+        ColourScheme complementary = sampleColour.complementaryScheme();
+        System.out.println("\nHere is an example of each colour scheme, using the colour " + colourPreview);
+        displayScheme(monochrome);
+        displayScheme(analogous);
+        displayScheme(triadic);
+        displayScheme(complementary);
     }
 }

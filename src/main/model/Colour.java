@@ -41,7 +41,7 @@ public class Colour {
     // EFFECTS: returns ANSI escape code that prints colour based on rgb values,
     //          width determines how many characters wide the colour block is
     public String getColourPrintCode(int width) {
-        String spaces = new String();
+        String spaces = "";
         for (int i = 0; i < width; i++) {
             spaces = spaces + " ";
         }

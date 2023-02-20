@@ -8,6 +8,7 @@ import static model.Colour.SHIFT_SIZE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// tests for Colour class
 class ColourTest {
     private Colour testColour;
     private Colour testColourB;

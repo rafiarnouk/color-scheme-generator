@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// tests for ColourScheme class
 class ColourSchemeTest {
     private ColourScheme testScheme;
     private Colour testColourA;
