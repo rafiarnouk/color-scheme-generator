@@ -21,7 +21,7 @@ public class ColourSchemeApp {
     // EFFECTS: processes inputs
     private void runColourScheme() {
         boolean keepRunning = true;
-        String command = null;
+        String command;
 
         gallery = new Gallery();
         colour = new Colour(0,0,0);
@@ -103,7 +103,7 @@ public class ColourSchemeApp {
     // EFFECTS: displays name and colours of colour scheme
     public void displayScheme(ColourScheme cs) {
         System.out.println("NAME: " + cs.getName());
-        String output = new String();
+        String output = "";
         for (Colour c : cs.getScheme()) {
             output = output + c.getColourPrintCode(COLOUR_BLOCK_WIDTH);
         }

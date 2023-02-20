@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static model.Colour.MONO_AMOUNT;
 import static model.Colour.SHIFT_SIZE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 // tests for Colour class
 class ColourTest {
@@ -40,8 +39,8 @@ class ColourTest {
         ColourScheme complementary = testColour.complementaryScheme();
         Colour inverted = new Colour(155, 205, 135);
 
-        assertTrue(compareColours(testColour, complementary.getColourAtIndex(0)));
-        assertTrue(compareColours(inverted, complementary.getColourAtIndex(1)));
+        assertTrue(testColour.compareColours(complementary.getColourAtIndex(0)));
+        assertTrue(inverted.compareColours(complementary.getColourAtIndex(1)));
 
         assertEquals(2, complementary.getSize());
         assertEquals("Complementary (100, 50, 120)", complementary.getName());
@@ -53,9 +52,9 @@ class ColourTest {
         Colour before = new Colour(50, 120, 100);
         Colour after = new Colour(120,100,50);
 
-        assertTrue(compareColours(before, triadic.getColourAtIndex(0)));
-        assertTrue(compareColours(testColour, triadic.getColourAtIndex(1)));
-        assertTrue(compareColours(after, triadic.getColourAtIndex(2)));
+        assertTrue(before.compareColours(triadic.getColourAtIndex(0)));
+        assertTrue(testColour.compareColours(triadic.getColourAtIndex(1)));
+        assertTrue(after.compareColours(triadic.getColourAtIndex(2)));
 
         assertEquals(3, triadic.getSize());
         assertEquals("Triadic (100, 50, 120)", triadic.getName());
@@ -81,7 +80,7 @@ class ColourTest {
         }
 
         for (int i = 0; i < monochrome.getSize(); i++) {
-            assertTrue(compareColours(expected.getColourAtIndex(i), monochrome.getColourAtIndex(i)));
+            assertTrue(expected.getColourAtIndex(i).compareColours(monochrome.getColourAtIndex(i)));
         }
 
         assertEquals(MONO_AMOUNT * 2 + 1, monochrome.getSize());
@@ -94,9 +93,9 @@ class ColourTest {
         Colour before = new Colour(100 - SHIFT_SIZE, 50, 120);
         Colour after = new Colour(100 + SHIFT_SIZE,50,120);
 
-        assertTrue(compareColours(before, analogous.getColourAtIndex(0)));
-        assertTrue(compareColours(testColour, analogous.getColourAtIndex(1)));
-        assertTrue(compareColours(after, analogous.getColourAtIndex(2)));
+        assertTrue(before.compareColours(analogous.getColourAtIndex(0)));
+        assertTrue(testColour.compareColours(analogous.getColourAtIndex(1)));
+        assertTrue(after.compareColours(analogous.getColourAtIndex(2)));
 
         assertEquals(3, analogous.getSize());
         assertEquals("Analogous (100, 50, 120)", analogous.getName());
@@ -108,9 +107,9 @@ class ColourTest {
         Colour before = new Colour(40, 120 - SHIFT_SIZE, 180);
         Colour after = new Colour(40,120 + SHIFT_SIZE,180);
 
-        assertTrue(compareColours(before, analogous.getColourAtIndex(0)));
-        assertTrue(compareColours(testColourB, analogous.getColourAtIndex(1)));
-        assertTrue(compareColours(after, analogous.getColourAtIndex(2)));
+        assertTrue(before.compareColours(analogous.getColourAtIndex(0)));
+        assertTrue(testColourB.compareColours(analogous.getColourAtIndex(1)));
+        assertTrue(after.compareColours(analogous.getColourAtIndex(2)));
 
         assertEquals(3, analogous.getSize());
         assertEquals("Analogous (40, 120, 180)", analogous.getName());
@@ -122,9 +121,9 @@ class ColourTest {
         Colour before = new Colour(100, 220, 150 - SHIFT_SIZE);
         Colour after = new Colour(100,220,150 + SHIFT_SIZE);
 
-        assertTrue(compareColours(before, analogous.getColourAtIndex(0)));
-        assertTrue(compareColours(testColourC, analogous.getColourAtIndex(1)));
-        assertTrue(compareColours(after, analogous.getColourAtIndex(2)));
+        assertTrue(before.compareColours(analogous.getColourAtIndex(0)));
+        assertTrue(testColourC.compareColours(analogous.getColourAtIndex(1)));
+        assertTrue(after.compareColours(analogous.getColourAtIndex(2)));
 
         assertEquals(3, analogous.getSize());
         assertEquals("Analogous (100, 220, 150)", analogous.getName());
@@ -137,9 +136,9 @@ class ColourTest {
         Colour before = new Colour(0,10 + SHIFT_SIZE * 2,120);
         Colour after = new Colour(0,10 + SHIFT_SIZE,120);
 
-        assertTrue(compareColours(before, analogous.getColourAtIndex(0)));
-        assertTrue(compareColours(testColourDark, analogous.getColourAtIndex(1)));
-        assertTrue(compareColours(after, analogous.getColourAtIndex(2)));
+        assertTrue(before.compareColours(analogous.getColourAtIndex(0)));
+        assertTrue(testColourDark.compareColours(analogous.getColourAtIndex(1)));
+        assertTrue(after.compareColours(analogous.getColourAtIndex(2)));
 
         assertEquals(3, analogous.getSize());
         assertEquals("Analogous (0, 10, 120)", analogous.getName());
@@ -152,16 +151,40 @@ class ColourTest {
         Colour before = new Colour(250,20,240 - SHIFT_SIZE);
         Colour after = new Colour(250,20,240 - SHIFT_SIZE * 2);
 
-        assertTrue(compareColours(before, analogous.getColourAtIndex(0)));
-        assertTrue(compareColours(testColourLight, analogous.getColourAtIndex(1)));
-        assertTrue(compareColours(after, analogous.getColourAtIndex(2)));
+        assertTrue(before.compareColours(analogous.getColourAtIndex(0)));
+        assertTrue(testColourLight.compareColours(analogous.getColourAtIndex(1)));
+        assertTrue(after.compareColours(analogous.getColourAtIndex(2)));
 
         assertEquals(3, analogous.getSize());
         assertEquals("Analogous (250, 20, 240)", analogous.getName());
     }
 
-    private boolean compareColours(Colour colourA, Colour colourB) {
-        return colourA.getRed() == colourB.getRed() && colourA.getBlue() == colourB.getBlue()
-                && colourA.getGreen() == colourA.getGreen();
+    @Test
+    void testCompareColoursTrue() {
+        Colour matchesTestColour = new Colour(100, 50, 120);
+        assertTrue(testColour.compareColours(matchesTestColour));
+    }
+
+    @Test
+    void testCompareColoursFalse() {
+        assertFalse(testColour.compareColours(testColourB));
+    }
+
+    @Test
+    void testCompareColoursOnlyRedDifferent() {
+        Colour redDifferent = new Colour(101, 50, 120);
+        assertFalse(redDifferent.compareColours(testColour));
+    }
+
+    @Test
+    void testCompareColoursOnlyGreenDifferent() {
+        Colour greenDifferent = new Colour(100, 49, 120);
+        assertFalse(greenDifferent.compareColours(testColour));
+    }
+
+    @Test
+    void testCompareColoursOnlyBlueDifferent() {
+        Colour blueDifferent = new Colour(100, 50, 220);
+        assertFalse(blueDifferent.compareColours(testColour));
     }
 }

@@ -165,4 +165,8 @@ public class Colour {
     private String generateName(String schemeType) {
         return (schemeType + " (" + getRed() + ", " + getGreen() + ", " + getBlue() + ")");
     }
+
+    public boolean compareColours(Colour colourB) {
+        return getRed() == colourB.getRed() && getBlue() == colourB.getBlue() && getGreen() == colourB.getGreen();
+    }
 }
