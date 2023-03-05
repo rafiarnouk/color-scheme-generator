@@ -24,3 +24,5 @@ level of complexity I can reach with my current skills in programming, so I am e
 - As a user, I want to be able to **generate** colour schemes for a colour that I have chosen.
 - As a user, I want to be able to **select** from different types of colour schemes, such as monochromatic or analogous ones.
 - As a user, I want to be able to **remove** a colour scheme from my collection.
+- As a user, I want the option to **save** a gallery to a file.
+- As a user, I want the option to **reload** a gallery from a file.
