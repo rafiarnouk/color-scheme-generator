@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // represents a colour using rgb values, which can be used as a base colour to generate colour schemes around
-public class Colour {
+public class Colour implements Writable {
     private int red;
     private int green;
     private int blue;
@@ -166,7 +169,17 @@ public class Colour {
         return (schemeType + " (" + getRed() + ", " + getGreen() + ", " + getBlue() + ")");
     }
 
+    // EFFECTS: returns true if colour is identical to this colour
     public boolean compareColours(Colour colourB) {
         return getRed() == colourB.getRed() && getBlue() == colourB.getBlue() && getGreen() == colourB.getGreen();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("red", red);
+        json.put("green", green);
+        json.put("blue", blue);
+        return json;
     }
 }

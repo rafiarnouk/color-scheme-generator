@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a gallery of colour schemes
-public class Gallery {
+public class Gallery implements Writable {
     private List<ColourScheme> gallery;
 
     public Gallery() {
@@ -37,5 +41,23 @@ public class Gallery {
     // EFFECTS: removes colour scheme at given position in gallery
     public void removeScheme(int index) {
         gallery.remove(index - 1);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gallery", galleryToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this gallery as a JSON array
+    private JSONArray galleryToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (ColourScheme cs : gallery) {
+            jsonArray.put(cs.toJson());
+        }
+
+        return jsonArray;
     }
 }

@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a colour scheme that has a list of colours and name
-public class ColourScheme {
+public class ColourScheme implements Writable {
     private List<Colour> scheme;
     private String name;
 
@@ -39,5 +43,24 @@ public class ColourScheme {
     // EFFECTS: adds colour to colour scheme
     public void addColour(Colour c) {
         scheme.add(c);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("scheme", schemeToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray schemeToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Colour c : scheme) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

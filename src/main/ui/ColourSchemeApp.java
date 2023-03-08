@@ -3,6 +3,11 @@ package ui;
 import model.Colour;
 import model.ColourScheme;
 import model.Gallery;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // interactive console based colour scheme generator app
@@ -10,10 +15,15 @@ public class ColourSchemeApp {
     private Gallery gallery;
     private Colour colour;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/gallery.json";
     private static final int COLOUR_BLOCK_WIDTH = 6;
 
     // EFFECTS: runs the colour scheme app
     public ColourSchemeApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runColourScheme();
     }
 
@@ -48,6 +58,8 @@ public class ColourSchemeApp {
         if (gallery.getSize() > 0) {
             System.out.println("\tr - remove scheme");
         }
+        System.out.println("\ta - save gallery to file");
+        System.out.println("\tl - load gallery from file");
         System.out.println("\ts - see examples");
         System.out.println("\tq - quit generator");
     }
@@ -64,6 +76,33 @@ public class ColourSchemeApp {
             removeColourScheme();
         } else if (command.equals("s")) {
             displayExamples();
+        } else if (command.equals("a")) {
+            saveGallery();
+        } else if (command.equals("l")) {
+            loadGallery();
+        }
+    }
+
+    // EFFECTS: saves the gallery to file
+    private void saveGallery() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(gallery);
+            jsonWriter.close();
+            System.out.println("Saved gallery to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads gallery from file
+    private void loadGallery() {
+        try {
+            gallery = jsonReader.read();
+            System.out.println("Loaded gallery from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
