@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // interactive console based colour scheme generator app
+// NOTE: all Json related code is heavily based on JsonSerializationDemo provided
 public class ColourSchemeApp {
     private Gallery gallery;
     private Colour colour;
@@ -201,6 +202,7 @@ public class ColourSchemeApp {
         System.out.println("\tc - complementary");
     }
 
+    // EFFECTS: displays examples of each type of colour scheme, based on the same colour
     private void displayExamples() {
         Colour sampleColour = new Colour(150,100,200);
         String colourPreview = sampleColour.getColourPrintCode(3);

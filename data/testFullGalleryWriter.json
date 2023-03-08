@@ -1,0 +1,37 @@
+{"gallery": [
+    {
+        "scheme": [
+            {
+                "red": 100,
+                "green": 200,
+                "blue": 100
+            },
+            {
+                "red": 155,
+                "green": 55,
+                "blue": 155
+            }
+        ],
+        "name": "Complementary (100, 200, 100)"
+    },
+    {
+        "scheme": [
+            {
+                "red": 220,
+                "green": 100,
+                "blue": 240
+            },
+            {
+                "red": 240,
+                "green": 220,
+                "blue": 100
+            },
+            {
+                "red": 100,
+                "green": 240,
+                "blue": 220
+            }
+        ],
+        "name": "Triadic (240, 220, 100)"
+    }
+]}
