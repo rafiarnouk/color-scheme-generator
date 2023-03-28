@@ -28,6 +28,9 @@ public class GUI extends JFrame implements ActionListener {
     private JButton saveButton;
     private JButton loadButton;
     private JButton galleryButton;
+    private JButton brighterButton;
+    private JButton darkerButton;
+    private JButton clearButton;
     private JComboBox schemeCombo;
     private JSlider redSlider;
     private JSlider greenSlider;
@@ -40,6 +43,8 @@ public class GUI extends JFrame implements ActionListener {
     private int red;
     private int green;
     private int blue;
+    private boolean brighter;
+    private boolean darker;
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 800;
@@ -64,7 +69,7 @@ public class GUI extends JFrame implements ActionListener {
         startGreenSlider(GREEN_START);
         startBlueSlider(BLUE_START);
         startSchemeChooser();
-        makeButtons();
+        makeMainMenuButtons();
 
         openMainMenu();
         setResizable(false);
@@ -77,6 +82,8 @@ public class GUI extends JFrame implements ActionListener {
     // initializes and sets variables
     private void initializeValues() {
         schemeType = "monochromatic";
+        brighter = false;
+        darker = false;
         gallery = new Gallery();
         red = RED_START;
         green = GREEN_START;
@@ -90,16 +97,20 @@ public class GUI extends JFrame implements ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        Color color = new Color(red, green, blue);
-        g.setColor(color);
-        int y = 28; // height of top bar
+        int y = 65; // height of top bar
         for (ColourScheme cs : gallery.getGallery()) {
             for (int i = 0; i < cs.getSize(); i++) {
-                g.setColor(new Color(cs.getColourAtIndex(i).getRed(),
+                Color color = new Color(cs.getColourAtIndex(i).getRed(),
                         cs.getColourAtIndex(i).getGreen(),
-                        cs.getColourAtIndex(i).getBlue()));
+                        cs.getColourAtIndex(i).getBlue());
+                g.setColor(color);
+                if (brighter) {
+                    g.setColor(color.brighter());
+                } else if (darker) {
+                    g.setColor(color.darker());
+                }
                 g.fillRect(WIDTH / cs.getSize() * i, y,
-                        WIDTH / scheme.getSize() + 2, SCHEME_HEIGHT);
+                        WIDTH / cs.getSize() + 2, SCHEME_HEIGHT);
             }
             g.setColor(Color.white);
             g.fillRect(0, y + SCHEME_HEIGHT, WIDTH, BAR_HEIGHT);
@@ -128,7 +139,7 @@ public class GUI extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: sets up buttons
-    private void makeButtons() {
+    private void makeMainMenuButtons() {
         createButton = new JButton("Create Colour Scheme");
         saveButton = new JButton("Save Gallery");
         loadButton = new JButton("Load Gallery");
@@ -155,20 +166,42 @@ public class GUI extends JFrame implements ActionListener {
     // EFFECTS: sets up gallery JPanel
     public void startGallery() {
         galleryView = new JPanel();
-        backButton = new JButton("Back to Generator");
-        backButton.addActionListener(this);
-        backButton.setActionCommand("backButton");
+        makeGalleryButtons();
         galleryView.setBackground(Color.white);
+    }
+
+    private void makeGalleryButtons() {
+        backButton = new JButton("Back to Generator");
+        brighterButton = new JButton("Make Schemes Brighter");
+        darkerButton = new JButton("Make Schemes Darker");
+        clearButton = new JButton("Clear Colour Schemes");
         galleryView.add(backButton);
+        galleryView.add(brighterButton);
+        galleryView.add(darkerButton);
+        galleryView.add(clearButton);
+        backButton.addActionListener(this);
+        brighterButton.addActionListener(this);
+        darkerButton.addActionListener(this);
+        clearButton.addActionListener(this);
+        backButton.setActionCommand("backButton");
+        brighterButton.setActionCommand("brighterButton");
+        darkerButton.setActionCommand("darkerButton");
+        clearButton.setActionCommand("clearButton");
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
     }
 
     // MODIFIES: this
     // EFFECTS: opens gallery panel
     private void openGallery() {
-        repaint();
         add(galleryView);
+        darker = false;
+        brighter = false;
         galleryView.setVisible(true);
         mainMenu.setVisible(false);
+        repaint();
     }
 
     // MODIFIES: this
@@ -179,6 +212,37 @@ public class GUI extends JFrame implements ActionListener {
         galleryView.setVisible(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets brighter schemes boolean to true and repaints
+    private void brighterSchemes() {
+        if (brighter) {
+            brighter = false;
+        } else {
+            brighter = true;
+            darker = false;
+        }
+        repaint();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets darker schemes boolean to true and repaints
+    private void darkerSchemes() {
+        if (darker) {
+            darker = false;
+        } else {
+            darker = true;
+            brighter = false;
+        }
+        repaint();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: clears out gallery
+    private void clearGallery() {
+        gallery.removeAllSchemes();
+        repaint();
+    }
+
     // EFFECTS: processes functionality for the buttons
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -187,10 +251,8 @@ public class GUI extends JFrame implements ActionListener {
             generateScheme(colour);
             gallery.addScheme(scheme);
             openGallery();
-            repaint();
         } else if (e.getActionCommand().equals("schemeCombo")) {
             schemeType = (String) schemeCombo.getSelectedItem();
-            System.out.println("SCHEME: " + schemeType);
         } else if (e.getActionCommand().equals("backButton")) {
             openMainMenu();
         } else if (e.getActionCommand().equals("saveButton")) {
@@ -199,7 +261,12 @@ public class GUI extends JFrame implements ActionListener {
             loadGallery();
         } else if (e.getActionCommand().equals("galleryButton")) {
             openGallery();
-            repaint();
+        } else if (e.getActionCommand().equals("brighterButton")) {
+            brighterSchemes();
+        } else if (e.getActionCommand().equals("darkerButton")) {
+            darkerSchemes();
+        } else if (e.getActionCommand().equals("clearButton")) {
+            clearGallery();
         }
     }
 

@@ -53,4 +53,11 @@ class GalleryTest {
         assertEquals(1, testGallery.getSize());
         assertEquals(testSchemeB, testGallery.getSchemeAtIndex(0));
     }
+
+    @Test
+    void testRemoveAllSchemes() {
+        assertEquals(2, testGallery.getSize());
+        testGallery.removeAllSchemes();
+        assertEquals(0, testGallery.getSize());
+    }
 }

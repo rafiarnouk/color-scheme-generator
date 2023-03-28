@@ -7,56 +7,46 @@
                 "blue": 0
             },
             {
-                "red": 75,
-                "green": 50,
-                "blue": 100
+                "red": 44,
+                "green": 70,
+                "blue": 52
             },
             {
-                "red": 150,
-                "green": 100,
-                "blue": 200
+                "red": 89,
+                "green": 141,
+                "blue": 105
             },
             {
-                "red": 202,
-                "green": 177,
-                "blue": 227
-            },
-            {
-                "red": 254,
-                "green": 254,
-                "blue": 254
-            }
-        ],
-        "name": "Monochrome (150, 100, 200)"
-    },
-    {
-        "scheme": [
-            {
-                "red": 0,
-                "green": 0,
-                "blue": 0
-            },
-            {
-                "red": 53,
-                "green": 97,
-                "blue": 37
-            },
-            {
-                "red": 107,
-                "green": 195,
-                "blue": 74
-            },
-            {
-                "red": 181,
-                "green": 225,
-                "blue": 164
+                "red": 172,
+                "green": 198,
+                "blue": 180
             },
             {
                 "red": 255,
                 "green": 255,
-                "blue": 254
+                "blue": 255
             }
         ],
-        "name": "Monochrome (107, 195, 74)"
+        "name": "Monochrome (89, 141, 105)"
+    },
+    {
+        "scheme": [
+            {
+                "red": 141,
+                "green": 105,
+                "blue": 89
+            },
+            {
+                "red": 89,
+                "green": 141,
+                "blue": 105
+            },
+            {
+                "red": 105,
+                "green": 89,
+                "blue": 141
+            }
+        ],
+        "name": "Triadic (89, 141, 105)"
     }
 ]}

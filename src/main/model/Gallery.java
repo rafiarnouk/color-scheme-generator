@@ -60,4 +60,9 @@ public class Gallery implements Writable {
 
         return jsonArray;
     }
+
+    // EFFECTS: removes all schemes in gallery
+    public void removeAllSchemes() {
+        gallery = new ArrayList<>();
+    }
 }
