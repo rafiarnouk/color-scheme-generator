@@ -318,6 +318,7 @@ public class GUI extends JFrame implements ActionListener {
         redSlider.setMinorTickSpacing(255 / 2);
         redSlider.setPaintTicks(true);
         redSlider.setPaintLabels(true);
+        redSlider.setName("Red Value");
 
         ChangeListener redListener = new ChangeListener() {
             public void stateChanged(ChangeEvent event) {

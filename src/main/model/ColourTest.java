@@ -3,8 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static model.Colour.MONO_AMOUNT;
-import static model.Colour.SHIFT_SIZE;
+import static model.Colour.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 // tests for Colour class
@@ -69,14 +68,18 @@ class ColourTest {
         int lighterG = 50 / MONO_AMOUNT;
         int lighterB = 120 / MONO_AMOUNT;
         for (int i = 0; i < MONO_AMOUNT; i++) {
-            expected.addColour(new Colour(lighterR * i, lighterG * i, lighterB * i));
+            expected.addColour(new Colour((int) (lighterR * i + lighterR * MONOCHROME_BUFFER),
+                    (int) (lighterG * i + lighterG * MONOCHROME_BUFFER),
+                    (int) (lighterB * i + lighterB * MONOCHROME_BUFFER)));
         }
 
         int darkerR = 155 / MONO_AMOUNT;
         int darkerG = 205 / MONO_AMOUNT;
         int darkerB = 135 / MONO_AMOUNT;
         for (int i = 0; i <= MONO_AMOUNT; i++) {
-            expected.addColour(new Colour(100 + darkerR * i, 50 + darkerG * i, 120 + darkerB * i));
+            expected.addColour(new Colour((int) (100 + darkerR * i - darkerR * MONOCHROME_BUFFER),
+                    (int) (50 + darkerG * i - darkerG * MONOCHROME_BUFFER),
+                    (int) (120 + darkerB * i - darkerB * MONOCHROME_BUFFER)));
         }
 
         for (int i = 0; i < monochrome.getSize(); i++) {

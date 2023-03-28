@@ -10,6 +10,7 @@ public class Colour implements Writable {
     private int blue;
     public static final int SHIFT_SIZE = 50;
     public static final int MONO_AMOUNT = 2;
+    public static final double MONOCHROME_BUFFER = 0.3;
 
     public Colour(int red, int green, int blue) {
         this.red = red;
@@ -82,16 +83,19 @@ public class Colour implements Writable {
         int lighterR = getRed() / MONO_AMOUNT;
         int lighterG = getGreen() / MONO_AMOUNT;
         int lighterB = getBlue() / MONO_AMOUNT;
-        for (int i = 0; i < MONO_AMOUNT; i++) {
-            Colour newColour = new Colour(lighterR * i, lighterG * i, lighterB * i);
+        for (int i = 0; i < MONO_AMOUNT; i++) { // used to be lighterR * i
+            Colour newColour = new Colour((int) (lighterR * i + lighterR * MONOCHROME_BUFFER),
+                    (int) (lighterG * i + lighterG * MONOCHROME_BUFFER),
+                    (int) (lighterB * i + lighterB * MONOCHROME_BUFFER));
             monochrome.addColour(newColour);
         }
         int darkerR = (255 - getRed()) / MONO_AMOUNT;
         int darkerG = (255 - getGreen()) / MONO_AMOUNT;
         int darkerB = (255 - getBlue()) / MONO_AMOUNT;
         for (int i = 0; i <= MONO_AMOUNT; i++) {
-            Colour newColour = new Colour(getRed() + (darkerR * i), getGreen() + (darkerG * i),
-                    getBlue() + (darkerB * i));
+            Colour newColour = new Colour((int) (getRed() + (darkerR * i) - darkerR * MONOCHROME_BUFFER),
+                    (int) (getGreen() + (darkerG * i) - darkerG * MONOCHROME_BUFFER),
+                    (int) (getBlue() + (darkerB * i) - darkerB * MONOCHROME_BUFFER));
             monochrome.addColour(newColour);
         }
         monochrome.setName(generateName("Monochrome"));
