@@ -5,6 +5,7 @@ import model.ColourScheme;
 
 public class Main {
     public static void main(String[] args) {
-        new ColourSchemeApp();
+        new GUI();
+        //new ColourSchemeApp();
     }
 }

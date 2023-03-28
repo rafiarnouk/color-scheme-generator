@@ -4,34 +4,79 @@
             {
                 "red": 100,
                 "green": 200,
-                "blue": 100
+                "blue": 150
             },
             {
-                "red": 155,
-                "green": 55,
-                "blue": 155
+                "red": 150,
+                "green": 100,
+                "blue": 200
+            },
+            {
+                "red": 200,
+                "green": 150,
+                "blue": 100
             }
         ],
-        "name": "Complementary (100, 200, 100)"
+        "name": "Triadic (150, 100, 200)"
     },
     {
         "scheme": [
             {
-                "red": 220,
-                "green": 100,
-                "blue": 240
-            },
-            {
-                "red": 240,
-                "green": 220,
-                "blue": 100
-            },
-            {
                 "red": 100,
-                "green": 240,
-                "blue": 220
+                "green": 204,
+                "blue": 84
+            },
+            {
+                "red": 150,
+                "green": 204,
+                "blue": 84
+            },
+            {
+                "red": 200,
+                "green": 204,
+                "blue": 84
             }
         ],
-        "name": "Triadic (240, 220, 100)"
+        "name": "Analogous (150, 204, 84)"
+    },
+    {
+        "scheme": [
+            {
+                "red": 100,
+                "green": 100,
+                "blue": 200
+            },
+            {
+                "red": 150,
+                "green": 100,
+                "blue": 200
+            },
+            {
+                "red": 200,
+                "green": 100,
+                "blue": 200
+            }
+        ],
+        "name": "Analogous (150, 100, 200)"
+    },
+    {
+        "scheme": [
+            {
+                "red": 100,
+                "green": 125,
+                "blue": 150
+            },
+            {
+                "red": 150,
+                "green": 100,
+                "blue": 125
+            },
+            {
+                "red": 125,
+                "green": 150,
+                "blue": 100
+            }
+        ],
+        "name": "Triadic (150, 100, 125)"
     }
 ]}
