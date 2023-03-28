@@ -138,7 +138,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up buttons
+    // EFFECTS: sets up menu buttons
     private void makeMainMenuButtons() {
         createButton = new JButton("Create Colour Scheme");
         saveButton = new JButton("Save Gallery");
@@ -170,6 +170,8 @@ public class GUI extends JFrame implements ActionListener {
         galleryView.setBackground(Color.white);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up gallery buttons
     private void makeGalleryButtons() {
         backButton = new JButton("Back to Generator");
         brighterButton = new JButton("Make Schemes Brighter");
