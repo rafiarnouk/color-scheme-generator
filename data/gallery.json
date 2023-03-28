@@ -2,49 +2,14 @@
     {
         "scheme": [
             {
-                "red": 100,
-                "green": 200,
-                "blue": 150
+                "red": 0,
+                "green": 0,
+                "blue": 0
             },
             {
-                "red": 150,
-                "green": 100,
-                "blue": 200
-            },
-            {
-                "red": 200,
-                "green": 150,
+                "red": 75,
+                "green": 50,
                 "blue": 100
-            }
-        ],
-        "name": "Triadic (150, 100, 200)"
-    },
-    {
-        "scheme": [
-            {
-                "red": 100,
-                "green": 204,
-                "blue": 84
-            },
-            {
-                "red": 150,
-                "green": 204,
-                "blue": 84
-            },
-            {
-                "red": 200,
-                "green": 204,
-                "blue": 84
-            }
-        ],
-        "name": "Analogous (150, 204, 84)"
-    },
-    {
-        "scheme": [
-            {
-                "red": 100,
-                "green": 100,
-                "blue": 200
             },
             {
                 "red": 150,
@@ -52,31 +17,46 @@
                 "blue": 200
             },
             {
-                "red": 200,
-                "green": 100,
-                "blue": 200
+                "red": 202,
+                "green": 177,
+                "blue": 227
+            },
+            {
+                "red": 254,
+                "green": 254,
+                "blue": 254
             }
         ],
-        "name": "Analogous (150, 100, 200)"
+        "name": "Monochrome (150, 100, 200)"
     },
     {
         "scheme": [
             {
-                "red": 100,
-                "green": 125,
-                "blue": 150
+                "red": 0,
+                "green": 0,
+                "blue": 0
             },
             {
-                "red": 150,
-                "green": 100,
-                "blue": 125
+                "red": 53,
+                "green": 97,
+                "blue": 37
             },
             {
-                "red": 125,
-                "green": 150,
-                "blue": 100
+                "red": 107,
+                "green": 195,
+                "blue": 74
+            },
+            {
+                "red": 181,
+                "green": 225,
+                "blue": 164
+            },
+            {
+                "red": 255,
+                "green": 255,
+                "blue": 254
             }
         ],
-        "name": "Triadic (150, 100, 125)"
+        "name": "Monochrome (107, 195, 74)"
     }
 ]}

@@ -16,6 +16,7 @@ import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// class representing graphic user interface
 public class GUI extends JFrame implements ActionListener {
 
     private JPanel mainMenu;
@@ -49,6 +50,8 @@ public class GUI extends JFrame implements ActionListener {
     private static final int BAR_HEIGHT = 5;
     private static final String JSON_STORE = "./data/gallery.json";
 
+    // MODIFIES: this
+    // EFFECTS: constructs user interface
     public GUI() {
         super("Colour Scheme Generator");
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -61,7 +64,7 @@ public class GUI extends JFrame implements ActionListener {
         startGreenSlider(GREEN_START);
         startBlueSlider(BLUE_START);
         startSchemeChooser();
-        createButton();
+        makeButtons();
 
         openMainMenu();
         setResizable(false);
@@ -70,6 +73,8 @@ public class GUI extends JFrame implements ActionListener {
         pack();
     }
 
+    // MODIFIES: this
+    // initializes and sets variables
     private void initializeValues() {
         schemeType = "monochromatic";
         gallery = new Gallery();
@@ -80,6 +85,8 @@ public class GUI extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints out all colour schemes in gallery
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -100,6 +107,8 @@ public class GUI extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up scheme chooser dropdown menu
     private void startSchemeChooser() {
         schemeCombo = new JComboBox(schemeTypes);
         mainMenu.add(schemeCombo);
@@ -108,6 +117,8 @@ public class GUI extends JFrame implements ActionListener {
         schemeCombo.setActionCommand("schemeCombo");
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up main menu JPanel
     public void startMenu() {
         mainMenu = new JPanel();
         mainMenu.setLayout(new GridLayout(2,1, 5, 100));
@@ -115,7 +126,9 @@ public class GUI extends JFrame implements ActionListener {
         add(mainMenu, BorderLayout.CENTER);
     }
 
-    private void createButton() {
+    // MODIFIES: this
+    // EFFECTS: sets up buttons
+    private void makeButtons() {
         createButton = new JButton("Create Colour Scheme");
         saveButton = new JButton("Save Gallery");
         loadButton = new JButton("Load Gallery");
@@ -138,6 +151,8 @@ public class GUI extends JFrame implements ActionListener {
         setResizable(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up gallery JPanel
     public void startGallery() {
         galleryView = new JPanel();
         backButton = new JButton("Back to Generator");
@@ -147,6 +162,8 @@ public class GUI extends JFrame implements ActionListener {
         galleryView.add(backButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: opens gallery panel
     private void openGallery() {
         repaint();
         add(galleryView);
@@ -154,12 +171,15 @@ public class GUI extends JFrame implements ActionListener {
         mainMenu.setVisible(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: opens main menu panel
     private void openMainMenu() {
         add(mainMenu);
         mainMenu.setVisible(true);
         galleryView.setVisible(false);
     }
 
+    // EFFECTS: processes functionality for the buttons
     @Override
     public void actionPerformed(ActionEvent e) {
         Colour colour = new Colour(red, green, blue);
@@ -183,6 +203,7 @@ public class GUI extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: generates colour scheme for given colour
     private void generateScheme(Colour colour) {
         if (schemeType == "monochromatic") {
             scheme = colour.monochromeScheme();
@@ -218,6 +239,9 @@ public class GUI extends JFrame implements ActionListener {
         }
     }
 
+    // REQUIRES: 0 <= startValue <= 255
+    // MODIFIES: this
+    // EFFECTS: starts red slider
     private void startRedSlider(int startValue) {
         redSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 255, startValue);
         mainMenu.add(redSlider);
@@ -236,6 +260,9 @@ public class GUI extends JFrame implements ActionListener {
         redSlider.addChangeListener(redListener);
     }
 
+    // REQUIRES: 0 <= startValue <= 255
+    // MODIFIES: this
+    // EFFECTS: starts green slider
     private void startGreenSlider(int startValue) {
         greenSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 255, startValue);
         mainMenu.add(greenSlider);
@@ -254,6 +281,9 @@ public class GUI extends JFrame implements ActionListener {
         greenSlider.addChangeListener(greenListener);
     }
 
+    // REQUIRES: 0 <= startValue <= 255
+    // MODIFIES: this
+    // EFFECTS: starts blue slider
     private void startBlueSlider(int startValue) {
         blueSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 255, startValue);
         mainMenu.add(blueSlider);
