@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // class representing graphic user interface
+// CITATIONS: how to use JSlider from https://stackoverflow.com/a/67958796
 public class GUI extends JFrame implements ActionListener {
 
     private JPanel mainMenu;
@@ -64,13 +65,11 @@ public class GUI extends JFrame implements ActionListener {
         startMenu();
         startGallery();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         startRedSlider(RED_START);
         startGreenSlider(GREEN_START);
         startBlueSlider(BLUE_START);
         startSchemeChooser();
         makeMainMenuButtons();
-
         openMainMenu();
         setResizable(false);
         setLocationRelativeTo(null);
