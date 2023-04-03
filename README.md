@@ -26,3 +26,11 @@ level of complexity I can reach with my current skills in programming, so I am e
 - As a user, I want to be able to **remove** a colour scheme from my collection.
 - As a user, I want the option to **save** a gallery to a file.
 - As a user, I want the option to **reload** a gallery from a file.
+
+## Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by clicking generate scheme
+- You can generate the second required action related to adding Xs to a Y by brightening or darkening all schemes are deleting all schemes
+- You can locate my visual component by viewing the gallery
+- You can save the state of my application by pressing save gallery
+- You can reload the state of my application by pressing load gallery
