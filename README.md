@@ -72,3 +72,11 @@ Darkened all schemes
 
 Wed Apr 05 00:56:53 PDT 2023 -
 Removed all schemes from gallery
+
+## Phase 4: Task 3
+A flaw in my design that jumps out to me by looking at by my UML diagram is the association relationship between GUI
+and scheme. It makes complete sense why GUI would have a gallery, but there is no real reason for it to have a colour scheme.
+I think it was something I did in the moment to make my life easier, but in hindsight, there are more sensible ways to approach
+writing this code. By removing this association, I would reduce the coupling in my project, making the project adhere more 
+closely to design standards, making it more adaptable. Apart from that, I think my program structure is mostly straightforward
+and concise.
