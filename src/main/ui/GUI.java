@@ -374,6 +374,7 @@ public class GUI extends JFrame implements ActionListener, WindowListener {
         blueSlider.addChangeListener(blueListener);
     }
 
+    // EFFECTS: print out all logged events when application is closed
     @Override
     public void windowClosing(WindowEvent e) {
         for (model.Event event : model.EventLog.getInstance()) {
@@ -381,31 +382,37 @@ public class GUI extends JFrame implements ActionListener, WindowListener {
         }
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowOpened(WindowEvent e) {
         // no actions required
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowClosed(WindowEvent e) {
         // no actions required
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowIconified(WindowEvent e) {
         // no actions required
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowDeiconified(WindowEvent e) {
         // no actions required
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowActivated(WindowEvent e) {
         // no actions required
     }
 
+    // EFFECTS: none, no action required but method must be implemented
     @Override
     public void windowDeactivated(WindowEvent e) {
         // no actions required
