@@ -34,6 +34,7 @@ public class Gallery implements Writable {
     // EFFECTS: adds colour scheme to gallery
     public void addScheme(ColourScheme cs) {
         gallery.add(cs);
+        EventLog.getInstance().logEvent(new Event("Added scheme " + cs.getName() + " to gallery"));
     }
 
     // REQUIRES: 1 <= index <= gallery size
@@ -43,6 +44,7 @@ public class Gallery implements Writable {
         gallery.remove(index - 1);
     }
 
+    // EFFECTS: writes gallery to json
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -64,5 +66,21 @@ public class Gallery implements Writable {
     // EFFECTS: removes all schemes in gallery
     public void removeAllSchemes() {
         gallery = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("Removed all schemes from gallery"));
+    }
+
+    // EFFECTS: logs that gallery was displayed
+    public void display() {
+        EventLog.getInstance().logEvent(new Event("Displayed all schemes"));
+    }
+
+    // EFFECTS: logs that schemes were brightened
+    public void brighterSchemes() {
+        EventLog.getInstance().logEvent(new Event("Brightened all schemes"));
+    }
+
+    // EFFECTS: logs that schemes were darkened
+    public void darkerSchemes() {
+        EventLog.getInstance().logEvent(new Event("Darkened all schemes"));
     }
 }

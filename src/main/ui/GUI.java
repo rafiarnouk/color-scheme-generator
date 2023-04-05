@@ -2,6 +2,8 @@ package ui;
 
 import model.Colour;
 import model.ColourScheme;
+import model.Event;
+import model.EventLog;
 import model.Gallery;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,15 +12,14 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // class representing graphic user interface
 // CITATIONS: how to use JSlider from https://stackoverflow.com/a/67958796
-public class GUI extends JFrame implements ActionListener {
+public class GUI extends JFrame implements ActionListener, WindowListener {
 
     private JPanel mainMenu;
     private JPanel galleryView;
@@ -62,6 +63,7 @@ public class GUI extends JFrame implements ActionListener {
         super("Colour Scheme Generator");
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         initializeValues();
+        addWindowListener(this);
         startMenu();
         startGallery();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -202,6 +204,7 @@ public class GUI extends JFrame implements ActionListener {
         brighter = false;
         galleryView.setVisible(true);
         mainMenu.setVisible(false);
+        gallery.display();
         repaint();
     }
 
@@ -222,6 +225,7 @@ public class GUI extends JFrame implements ActionListener {
             brighter = true;
             darker = false;
         }
+        gallery.brighterSchemes();
         repaint();
     }
 
@@ -234,6 +238,7 @@ public class GUI extends JFrame implements ActionListener {
             darker = true;
             brighter = false;
         }
+        gallery.darkerSchemes();
         repaint();
     }
 
@@ -286,19 +291,20 @@ public class GUI extends JFrame implements ActionListener {
 
     // EFFECTS: saves the gallery to file
     private void saveGallery() {
+        EventLog.getInstance().logEvent(new Event("Saved gallery to file"));
         try {
             jsonWriter.open();
             jsonWriter.write(gallery);
             jsonWriter.close();
-            System.out.println("Saved gallery to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            //
         }
     }
 
     // MODIFIES: this
     // EFFECTS: loads gallery from file
     private void loadGallery() {
+        EventLog.getInstance().logEvent(new Event("Loaded gallery from file"));
         try {
             gallery = jsonReader.read();
             System.out.println("Loaded gallery from " + JSON_STORE);
@@ -323,7 +329,6 @@ public class GUI extends JFrame implements ActionListener {
             public void stateChanged(ChangeEvent event) {
                 JSlider source = (JSlider) event.getSource();
                 red = source.getValue();
-                System.out.println("RED: " + red);
             }
         };
         redSlider.addChangeListener(redListener);
@@ -344,7 +349,6 @@ public class GUI extends JFrame implements ActionListener {
             public void stateChanged(ChangeEvent event) {
                 JSlider source = (JSlider) event.getSource();
                 green = source.getValue();
-                System.out.println("GREEN: " + green);
             }
         };
         greenSlider.addChangeListener(greenListener);
@@ -365,9 +369,45 @@ public class GUI extends JFrame implements ActionListener {
             public void stateChanged(ChangeEvent event) {
                 JSlider source = (JSlider) event.getSource();
                 blue = source.getValue();
-                System.out.println("BLUE: " + blue);
             }
         };
         blueSlider.addChangeListener(blueListener);
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (model.Event event : model.EventLog.getInstance()) {
+            System.out.println(event);
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        // no actions required
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        // no actions required
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        // no actions required
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        // no actions required
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // no actions required
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        // no actions required
     }
 }

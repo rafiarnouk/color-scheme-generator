@@ -34,3 +34,41 @@ level of complexity I can reach with my current skills in programming, so I am e
 - You can locate my visual component by viewing the gallery
 - You can save the state of my application by pressing save gallery
 - You can reload the state of my application by pressing load gallery
+
+## Phase 4: Task 2
+### Example Log
+Wed Apr 05 00:56:26 PDT 2023 -
+Added scheme Monochrome (107, 100, 75) to gallery
+
+Wed Apr 05 00:56:26 PDT 2023 -
+Displayed all schemes
+
+Wed Apr 05 00:56:32 PDT 2023 -
+Displayed all schemes
+
+Wed Apr 05 00:56:34 PDT 2023 -
+Loaded gallery from file
+
+Wed Apr 05 00:56:36 PDT 2023 -
+Displayed all schemes
+
+Wed Apr 05 00:56:41 PDT 2023 -
+Added scheme Analogous (107, 100, 171) to gallery
+
+Wed Apr 05 00:56:41 PDT 2023 -
+Displayed all schemes
+
+Wed Apr 05 00:56:48 PDT 2023 -
+Saved gallery to file
+
+Wed Apr 05 00:56:49 PDT 2023 -
+Displayed all schemes
+
+Wed Apr 05 00:56:50 PDT 2023 -
+Brightened all schemes 
+
+Wed Apr 05 00:56:52 PDT 2023 -
+Darkened all schemes
+
+Wed Apr 05 00:56:53 PDT 2023 -
+Removed all schemes from gallery
